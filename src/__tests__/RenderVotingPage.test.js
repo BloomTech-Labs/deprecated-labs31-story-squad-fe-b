@@ -14,6 +14,24 @@ afterEach(() => {
   cleanup();
 });
 
+jest.mock('@okta/okta-react', () => ({
+  useOktaAuth: () => {
+    return {
+      authState: {
+        isAuthenticated: true,
+      },
+      authService: {
+        getUser: () => Promise.reject(),
+      },
+    };
+  },
+}));
+jest.mock('react-router-dom', () => ({
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+}));
+
 describe('<RenderVotingPage />', () => {
   let wrapper;
 
