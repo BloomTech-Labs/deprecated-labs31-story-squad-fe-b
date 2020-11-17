@@ -48,6 +48,7 @@ const PointShare = props => {
         SubmissionID: props.team.child2.SubmissionID,
       },
     ]);
+    push('/child/dashboard');
   };
 
   useEffect(() => {
@@ -238,7 +239,7 @@ const PointShare = props => {
           size="large"
           onClick={formSubmit}
         >
-          Match Up!
+          Submit Points
         </Button>
         <Button className="back-to-join-the-squad" onClick={backToJoin}>
           Back
