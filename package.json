@@ -38,7 +38,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "craco --max_old_space_size=4096 start",
     "build": "craco build",
     "test": "craco test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject",

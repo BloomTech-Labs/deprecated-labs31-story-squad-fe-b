@@ -52,30 +52,42 @@ const RenderChildDashboard = props => {
           >
             <p className="accept-mission-text">ACCEPT THE MISSION!</p>
           </Col>
-          <Col className="change-avatar" xs={24} sm={11}>
+          <Col
+            className="change-avatar"
+            xs={24}
+            sm={11}
+            onClick={handleAdminPage}
+          >
             <img
               className="child-dash-img"
               src={change_your_avatar}
               alt="Change Your Avatar Button"
-              onClick={handleAdminPage}
             />
           </Col>
         </Row>
         <Row className="bottomrow">
-          <Col className="adventure-passport" xs={24} sm={11}>
+          <Col
+            className="adventure-passport"
+            xs={24}
+            sm={11}
+            onClick={handleJoinSquad}
+          >
             <img
               className="child-dash-img"
               src={adventure_passport}
               alt="Adventure Passport Button"
-              onClick={handleJoinSquad}
             />
           </Col>
-          <Col className="trophy-room" xs={24} sm={13}>
+          <Col
+            className="trophy-room"
+            xs={24}
+            sm={13}
+            onClick={handleTrophyRoom}
+          >
             <img
               className="child-dash-img"
               src={trophy_room}
               alt="Trophy Room Button"
-              onClick={handleTrophyRoom}
             />
           </Col>
         </Row>
