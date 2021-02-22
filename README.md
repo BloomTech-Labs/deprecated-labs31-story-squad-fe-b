@@ -10,11 +10,11 @@ You can find the deployed project at: [AWS Amplify](https://b.storysquad.dev/)
 
 ## Current State Of The App
 <!-- Todo! Update this -->
-Work done by labs30: TBD <br/>
+Work done by labs30: [Trello board, 90% updated](https://trello.com/b/tHGGIpzX) <br/>
 Work done by labs29: [Click Here](https://docs.google.com/spreadsheets/d/1ZdhfQEAsz3IhgVa8zMZ0JkuD6-oasDI4hplPFXZaXNQ/edit?usp=sharing)
 
-## Project Overview
-[How the App should work - A primer for devs](storysquadExplained.md)
+## Project Documents Links
+[**START HERE** How the App should work - A primer for devs](storysquadExplained.md)
 <br/>
 [Labs27 Frontend video](https://youtu.be/RwdSUOyeXG0)
 <br>
@@ -37,7 +37,7 @@ Each week features a new chapter in an exciting novel, written and serialized sp
 
 In addition to growing their literary and artistic skills, students learn team building and critical thinking skills through a unique voting system, where each child must weight their own work against their teammate in order to increase their odds of winning. Badges and points incentivize winning and encourage participation.
 
-Story Squad is a paid service; parents are required to create the account for their children and pay a monthly subscription fee in order for their children to compete. This brings the platform into compliance with COPPA and ensures a long future for the project.
+Story Squad is a paid service; parents are required to create an account for their children and pay a monthly subscription fee in order for their children to compete. This brings the platform into compliance with COPPA and ensures a long future for the project.
 
 ## Contributors
 
@@ -137,36 +137,73 @@ Jest
 
 ## Installation Instructions
 <!-- Todo! Update this -->
-Clone repo
+1. Clone and download the [backend](https://github.com/Lambda-School-Labs/story-squad-be-b.git)
+
+2. Follow backend [set up guides](https://github.com/Lambda-School-Labs/story-squad-be-b.git)
+
+    Fast backend setup:
+    1. Send a slack message to a previous labs member to handoff docker passwords, & functional FE & BE .env files with links. or get from TPL.
+        - Labs30: Josh Glantz or Michael Hernandez or Ed Estrada
+    2. Install [Docker](https://www.docker.com/products/docker-desktop)
+        - then run: `docker-compose up -d` to start up the postgresql database and pgadmin.
+    3. Inside backend folder terminal `cd story-squad-be-b/`
+        - run: `npm install` to download all dependencies.
+        - run: `cp .env.sample .env` and update the enviornment variables in the .ev file to those you got from previous labs member.
+        - run: `npm run knex migrate:latest` to create the starting schema.
+        - run: `npm run knex seed:run` to populate your db with some data.
+        - run: `npm run tests` to confirm all is setup and tests pass.
+        - run: `npm run watch:dev` to start nodemon in local dev enviornment.
+        - Open a browser to pgadmin [at localhost:5050/](http://localhost:5050/) and you should see the Dev server already defined.
+
+
+    4. Clone this frontend repo
+
+        ```
+        git clone https://github.com/Lambda-School-Labs/story-squad-fe-b.git
+
+        cd story-squad-fe-b/
+        ```
+
+        Install Dependencies
+
+        ```
+        npm install
+        ```
+
+        Create .env from .env.sample & update
+        ```
+        `cp .env.sample .env`
+        //then update .env from info from previous labs member
+        ```
+
+        Run Test
+
+        ```
+        npm test
+        ```
+
+        <br>
+        Run the application locally
+
+        ```
+        npm run
+        ```
 
 ```
-git clone https://github.com/Lambda-School-Labs/story-squad-fe-b.git
-
-cd story-squad-fe-b/
+//Login for dev test accounts (more in backend seed data)
+User: llama002@maildrop.cc
+Pw: Test002Test
+Pin for all the users (first user is always parent): 0000
 ```
+### Using PGAdmin to see current state of database
 
-Install Dependencies
+in browser, visit [http://localhost:5050/](http://localhost:5050/)
 
-```
-npm install
-```
+In order to view current database, navigate through the following option's in the sidebar
 
-Run Test
-
-```
-npm test
-```
-
-Clone and download the [backend](https://github.com/Lambda-School-Labs/story-squad-be-b.git)
-
-Follow backend [set up guides](https://github.com/Lambda-School-Labs/story-squad-be-b.git)
-<br>
-<br>
-Run the application locally
-
-```
-npm dev
-```
+- `Dev`, `API-dev`, `Schemas`, `public`, `Tables`
+- When prompted, docker password is (something you need from previous labs member)
+- Choose which table you want to view, then right-click on it, `View/EditData`, and choose how many rows you want to display.
 
 ## Other Scripts
 
