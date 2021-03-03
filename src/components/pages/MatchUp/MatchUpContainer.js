@@ -13,18 +13,38 @@ import {
 } from '../../../api/index';
 
 function MatchUpContainer({ LoadingComponent, ...props }) {
+  //ERRLOG: child id is not being passed into the params properly, cannot find child with ID of null
+
   const { authState, authService } = useOktaAuth();
   const [userInfo, setUserInfo] = useState(null);
   const [canVote, setCanVote] = useState(true);
+  const [updateFaceoffs, setUpdateFaceoffs] = useState([]);
   // eslint-disable-next-line
   const [memoAuthService] = useMemo(() => [authService], []);
 
   useEffect(() => {
-    getChild(authState, props.child.memberId).then(child => {
+    getChild(authState, props.child.id).then(child => {
       props.setChild({ ...child });
     });
+
+    if (props.child.Ballots) {
+      if (props.child.Ballots.length > 0 && props.child.VotesRemaining > 0) {
+        for (let ballot of props.child.Ballots) {
+          getFaceoffsForVoting(authState, ballot[1]).then(faceoffs => {
+            setUpdateFaceoffs(faceoffs);
+            if (props.votes.length === 0) {
+              for (let faceoff of faceoffs) {
+                if (faceoff.ID === ballot[0]) {
+                  props.setVotes(faceoff);
+                }
+              }
+            }
+          });
+        }
+      }
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props.faceoffs, authState, props.child.VotesRemaining]);
 
   useEffect(() => {
     if (props.child.VotesRemaining === 0) {
@@ -59,22 +79,6 @@ function MatchUpContainer({ LoadingComponent, ...props }) {
           props.setSquadFaceoffs(allFaceoffs);
         }
       );
-
-      if (
-        props.child.Ballots.length > 0 &&
-        props.child.VotesRemaining > 0 &&
-        props.votes.length === 0
-      ) {
-        for (let ballot of props.child.Ballots) {
-          getFaceoffsForVoting(authState, ballot[1]).then(faceoffs => {
-            for (let faceoff of faceoffs) {
-              if (faceoff.ID === ballot[0]) {
-                props.setVotes(faceoff);
-              }
-            }
-          });
-        }
-      }
     });
 
     // eslint-disable-next-line
@@ -92,6 +96,7 @@ function MatchUpContainer({ LoadingComponent, ...props }) {
           authService={authService}
           canVote={canVote}
           votesRemaining={props.child.VotesRemaining}
+          faceoffs={updateFaceoffs}
         />
       )}
     </>

@@ -24,28 +24,23 @@ const Leaderboard = () => {
 
   const table = [
     // Structre of the Table
+    //Person is still able to sort data even with sorter tooltip set to false
+    //Might not be worth using ant Table and just using colomns and Rows since you have more flexiblity and
+    // more freedom to do what you want and set up data the way youu want it to be displayed
+    // Add Rankings to the table
     {
-      //Person is still able to sort data even with sorter tooltip set to false
-      //Might not be worth using ant Table and just using colomns and Rows since you have more flexiblity and
-      // more freedom to do what you want and set up data the way youu want it to be displayed
-      // Add Rankings to the table
-      title: 'W/L',
-      children: [
-        {
-          title: 'Wins',
-          dataIndex: 'Wins',
-          width: 100,
-          defaultSortOrder: 'descend',
-          sorter: (a, b) => a.Wins - b.Wins,
-          sortDirections: ['ASC', 'DESC'],
-          showSorterTooltip: false,
-        },
-        {
-          title: 'Losses',
-          dataIndex: 'Losses',
-          width: 100,
-        },
-      ],
+      title: 'Wins',
+      dataIndex: 'Wins',
+      width: 100,
+      defaultSortOrder: 'descend',
+      sorter: (a, b) => a.Wins - b.Wins,
+      sortDirections: ['ASC', 'DESC'],
+      showSorterTooltip: false,
+    },
+    {
+      title: 'Losses',
+      dataIndex: 'Losses',
+      width: 100,
     },
     {
       title: 'Name',
@@ -71,6 +66,12 @@ const Leaderboard = () => {
       key: 'DrawingPoints',
       width: 100,
     },
+    {
+      title: 'Streak',
+      dataIndex: 'Streak',
+      key: 'Name',
+      width: 100,
+    },
   ];
 
   return (
@@ -81,6 +82,7 @@ const Leaderboard = () => {
         columns={table}
         rowKey="uid"
         dataSource={data}
+        size="middle"
       />
     </div>
   );

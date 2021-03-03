@@ -58,7 +58,8 @@ const RenderTrophyRoom = props => {
             onCancel={handleAchievementCancel}
             width={900}
           >
-            <div style={{ overflow: 'scroll' }}>
+            {/* style={{ overflow: 'scroll' }} */}
+            <div>
               <h3>Completed (Way to go!):</h3>
               {/* {achievementState.map(achievement => {
             if (achievement.completed === true) {
